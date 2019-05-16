@@ -8,10 +8,12 @@ void userAppInit()
     romfsInit();
     socketInitializeDefault();
     nxlink_sock = nxlinkStdio();
+    plInitialize();
 }
 
 void userAppExit()
 {
+    plExit();
     if (nxlink_sock != -1)
         close(nxlink_sock);
     socketExit();

@@ -4,6 +4,10 @@
 
 #include <Application.hpp>
 
+#ifdef __SWITCH__
+#include <switch.h>
+#endif
+
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 #include <glad.h>
@@ -135,6 +139,18 @@ bool Application::init()
     glfwSetTime(0.0);
 
     // Load fonts
+#ifdef __SWITCH__
+       {
+            PlFontData font;
+            Result rc = plGetSharedFontByType(&font, PlSharedFontType_Standard);
+            if(R_SUCCEEDED(rc))
+            {
+                printf("Using Switch shared font\n");
+                this->fontStash.regular = nvgCreateFontMem(this->vg, "regular", (unsigned char*)font.address, font.size, 0);
+                return true;
+            }
+       }
+#endif
     this->fontStash.regular = nvgCreateFont(this->vg, "regular", ASSET("Inter-Regular.ttf")); //TODO: Load shared font on Switch
 
     return true;

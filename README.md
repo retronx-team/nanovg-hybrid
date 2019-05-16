@@ -9,7 +9,7 @@ To build for Switch, a standard development environment must first be set up. In
 ```bash
 (sudo) (dkp-)pacman -S switch-glfw switch-mesa switch-glm
 make -j
-nxlink -s hybrid_app.nro
+nxlink -s nanovg_hybrid.nro
 ```
 
 ## Building the example for PC
